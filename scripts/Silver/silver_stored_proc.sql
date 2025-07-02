@@ -19,7 +19,7 @@ Tables Processed:
   - crm_cust_info
   - crm_prd_info
   - crm_sales_details
-  - erp_cust_aziz12
+  - erp_cust_az12
   - erp_loc_a101
   - erp_px_cat_g1v2
 
@@ -113,19 +113,18 @@ SELECT
     END
 FROM bronze.crm_sales_details;
 
-TRUNCATE TABLE silver.erp_cust_aziz12;
-INSERT INTO silver.erp_cust_aziz12 (
-    cid, cid_cleaned, bdate, gen_cleaned
+TRUNCATE TABLE silver.erp_cust_az12;
+INSERT INTO silver.erp_cust_az12 (
+    cid, bdate, gen
 )
 SELECT
-    cid,
-    CASE WHEN cid LIKE 'NAS%' THEN SUBSTRING(cid FROM 4) ELSE cid END,
-    CASE WHEN bdate > CURRENT_TIMESTAMP THEN NULL ELSE bdate END,
+    CASE WHEN cid LIKE 'NAS%' THEN SUBSTRING(cid FROM 4) ELSE cid END AS cid,
+    CASE WHEN bdate > CURRENT_TIMESTAMP THEN NULL ELSE bdate END AS bdate,
     CASE
         WHEN UPPER(TRIM(gen)) IN ('F', 'FEMALE') THEN 'Female'
         WHEN UPPER(TRIM(gen)) IN ('M', 'MALE') THEN 'Male'
         ELSE 'n/a'
-    END
+    END AS gen
 FROM bronze.erp_cust_az12;
 
 TRUNCATE TABLE silver.erp_loc_a101;
