@@ -46,12 +46,11 @@ CREATE TABLE silver.crm_sales_details (
 	sls_price NUMERIC(10,2)
 );
 
-DROP TABLE IF EXISTS silver.erp_cust_aziz12;
-CREATE TABLE silver.erp_cust_aziz12 (
+DROP TABLE IF EXISTS silver.erp_cust_az12;
+CREATE TABLE silver.erp_cust_az12 (
 	cid VARCHAR(50),
-	cid_cleaned VARCHAR(50),
 	bdate DATE,
-	gen_cleaned VARCHAR(10)
+	gen VARCHAR(10)
 );
 
 DROP TABLE IF EXISTS silver.erp_loc_a101;
